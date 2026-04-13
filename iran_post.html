@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미-이란 협상 결렬, 내 주식 지금 어떻게? | 호르무즈 쇼크 투자 생존 가이드 2026</title>
+<meta name="description" content="2026년 4월 미-이란 전쟁 40일, 코스피 -19% 후 반등. 유가 100달러 재돌파, 협상 결렬 이후 투자 전략을 시뮬레이터로 직접 체험해보세요.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#f8f9fa;--surface:#fff;--border:#e2e8f0;--text:#1a202c;--text2:#64748b;--text3:#94a3b8;--red:#dc2626;--red-bg:#fef2f2;--red-t:#b91c1c;--green:#16a34a;--green-bg:#f0fdf4;--amber:#d97706;--amber-bg:#fffbeb;--blue:#2563eb;--blue-bg:#eff6ff;--r:10px;--rs:6px;}
+body{font-family:-apple-system,'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+.page{max-width:760px;margin:0 auto;padding:24px 16px 80px;}
+
+/* 헤더 */
+.post-header{background:var(--red-bg);border:1px solid #fecaca;border-radius:var(--r);padding:28px;margin-bottom:28px;}
+.post-eyebrow{font-size:11px;font-weight:600;color:var(--red-t);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;}
+.post-title{font-size:26px;font-weight:700;color:var(--red-t);line-height:1.3;margin-bottom:10px;}
+.post-sub{font-size:14px;color:var(--red-t);opacity:.85;line-height:1.6;}
+.post-meta{display:flex;gap:16px;margin-top:14px;font-size:12px;color:var(--red-t);opacity:.7;}
+
+/* 본문 */
+h2.section{font-size:18px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--border);}
+h3.sub{font-size:15px;font-weight:600;margin:20px 0 10px;color:var(--text);}
+p.body{font-size:14px;line-height:1.85;color:var(--text2);margin-bottom:14px;}
+.highlight-box{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--rs);padding:14px 16px;margin:16px 0;font-size:13px;line-height:1.7;color:#1d4ed8;}
+.warn-box{background:var(--red-bg);border:1px solid #fecaca;border-radius:var(--rs);padding:14px 16px;margin:16px 0;font-size:13px;line-height:1.7;color:var(--red-t);}
+.tip-box{background:var(--green-bg);border:1px solid #bbf7d0;border-radius:var(--rs);padding:14px 16px;margin:16px 0;font-size:13px;line-height:1.7;color:#15803d;}
+
+/* 지표 카드 */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0;}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:14px;text-align:center;}
+.stat-l{font-size:11px;color:var(--text2);margin-bottom:5px;}
+.stat-v{font-size:20px;font-weight:700;}
+.red{color:var(--red);}.green{color:var(--green);}.amber{color:var(--amber);}.blue{color:var(--blue);}
+
+/* 타임라인 */
+.tl{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:16px 0;}
+.tl-item{display:flex;gap:14px;padding:14px 16px;border-bottom:1px solid var(--border);background:var(--surface);}
+.tl-item:last-child{border-bottom:none;}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.tl-date{font-size:11px;font-weight:600;color:var(--text2);min-width:56px;flex-shrink:0;padding-top:3px;}
+.tl-body{font-size:13px;line-height:1.65;}
+.tl-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;}
+
+/* 섹터 바 */
+.sector-wrap{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:16px 0;}
+.sector-row{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border);background:var(--surface);}
+.sector-row:last-child{border-bottom:none;}
+.sector-name{font-size:13px;min-width:120px;flex-shrink:0;}
+.sector-bar-bg{flex:1;background:var(--bg);border-radius:4px;height:10px;overflow:hidden;}
+.sector-bar{height:10px;border-radius:4px;}
+.sector-pct{font-size:13px;font-weight:700;min-width:52px;text-align:right;}
+
+/* 전략 카드 */
+.strat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;}
+.strat-card{border:1px solid var(--border);border-radius:var(--rs);padding:16px;background:var(--surface);}
+.strat-badge{font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:10px;}
+.strat-title{font-size:13px;font-weight:600;margin-bottom:8px;}
+.strat-body{font-size:12px;color:var(--text2);line-height:1.65;}
+.strat-stocks{font-size:11px;color:var(--text2);margin-top:10px;padding-top:8px;border-top:1px solid var(--border);}
+
+/* 시뮬레이터 */
+.sim-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin:16px 0;}
+.sim-title{font-size:14px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.sim-badge{background:#EAF3DE;color:#3B6D11;font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px;}
+.fr{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.fl{font-size:13px;color:var(--text2);min-width:120px;flex-shrink:0;}
+.fi{display:flex;align-items:center;gap:10px;flex:1;}
+.fi input[type=range]{flex:1;accent-color:var(--blue);}
+.fi select{flex:1;border:1px solid var(--border);border-radius:var(--rs);padding:7px 10px;font-size:13px;background:var(--bg);}
+.fv{font-size:13px;font-weight:600;min-width:70px;text-align:right;}
+.sim-result{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;}
+.sim-res{background:var(--bg);border-radius:var(--rs);padding:14px;text-align:center;border:1px solid var(--border);}
+.sim-rl{font-size:11px;color:var(--text2);margin-bottom:5px;line-height:1.4;}
+.sim-rv{font-size:17px;font-weight:700;}
+.sim-hbox{border-radius:var(--rs);padding:11px 14px;font-size:13px;font-weight:600;margin-top:14px;border:1px solid;}
+
+/* 일정 */
+.schedule{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:16px 0;}
+.sch-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);font-size:13px;}
+.sch-row:last-child{border-bottom:none;}
+.sch-date{font-size:11px;font-weight:600;color:var(--text2);min-width:44px;flex-shrink:0;}
+
+/* 체크리스트 */
+.checklist{display:flex;flex-direction:column;gap:12px;margin:16px 0;}
+.check-item{display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.65;}
+.check-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;margin-top:1px;}
+
+/* 태그 */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;padding-top:20px;border-top:1px solid var(--border);}
+.tag{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--text2);}
+
+/* footer */
+.post-footer{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-top:28px;font-size:12px;color:var(--text2);line-height:1.7;}
+
+@media(max-width:540px){
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .strat-grid{grid-template-columns:1fr;}
+  .sim-result{grid-template-columns:1fr;}
+  .post-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- 헤더 -->
+<div class="post-header">
+  <p class="post-eyebrow">2026년 4월 13일 · 실시간 이슈 분석</p>
+  <h1 class="post-title">미-이란 협상 결렬, 내 주식 지금 어떻게?<br>호르무즈 쇼크 투자 생존 가이드</h1>
+  <p class="post-sub">코스피 -19% · 유가 100달러 재돌파 · 협상 결렬 후 변동성 재확대<br>지금 당신이 알아야 할 모든 것과 직접 체험 가능한 시뮬레이터</p>
+  <div class="post-meta">
+    <span>Mr.J의 즐거운 돈 놀이</span>
+    <span>2026.04.13</span>
+    <span>읽는 시간 약 5분</span>
+  </div>
+</div>
+
+<!-- 도입 -->
+<p class="body">안녕하세요, Mr.J입니다. 오늘은 지금 이 순간 전 세계 투자자들이 가장 주목하고 있는 이슈 — 미국과 이란의 종전 협상 결렬과 호르무즈 해협 재봉쇄에 대해 깊이 파헤쳐 보겠습니다.</p>
+
+<p class="body">오늘(4월 13일) 새벽, JD 밴스 미국 부통령이 파키스탄 이슬라마바드에서 기자회견을 열고 "이란과 합의에 도달하지 못했다"고 공식 발표했습니다. 트럼프 대통령은 즉각 트루스소셜에 "미 해군이 호르무즈 해협에 진입하거나 떠나려는 모든 선박을 봉쇄하는 절차를 시작할 것"이라고 선언했습니다. 삼성전자와 SK하이닉스는 -2%대로 하락 출발했습니다.</p>
+
+<div class="warn-box">⚠ 오늘 오전 10시(한국시간)부터 미군의 이란 출입 해상교통 봉쇄가 공식 시작됩니다. 유가 100달러 재돌파 · CPI 3.3% 확인 · 코스피 변동성 확대 국면입니다.</div>
+
+<!-- 핵심 지표 -->
+<h2 class="section">지금 시장 상황 — 핵심 숫자 4개</h2>
+<div class="stat-grid">
+  <div class="stat"><p class="stat-l">코스피 (4/10)</p><p class="stat-v blue">5,859</p></div>
+  <div class="stat"><p class="stat-l">국제유가 WTI</p><p class="stat-v amber">$100+</p></div>
+  <div class="stat"><p class="stat-l">전쟁 후 코스피 낙폭</p><p class="stat-v red">-19%</p></div>
+  <div class="stat"><p class="stat-l">美 3월 CPI</p><p class="stat-v red">+3.3%</p></div>
+</div>
+
+<!-- 타임라인 -->
+<h2 class="section">전쟁 발발부터 오늘까지 — 40일 타임라인</h2>
+<p class="body">2026년 2월 28일, 미국과 이스라엘이 '에픽 퓨리 작전'으로 이란을 공습하며 모든 것이 시작됐습니다. 40일이 지난 지금까지의 흐름을 정리했습니다.</p>
+
+<div class="tl">
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#dc2626"></div>
+    <span class="tl-date">2/28</span>
+    <span class="tl-body">미·이스라엘 '에픽 퓨리 작전' — 이란 공습. 하메네이 사망 확인. 이란 혁명수비대 호르무즈 봉쇄 선언<span class="tl-badge" style="background:#fef2f2;color:#b91c1c">전쟁 발발</span></span>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#dc2626"></div>
+    <span class="tl-date">3월</span>
+    <span class="tl-body">코스피 월간 -19.08%, 역대 4번째 낙폭. 시총 최대 987조 증발. 상장 종목 10개 중 7개 하락<span class="tl-badge" style="background:#fef2f2;color:#b91c1c">역대 4위 낙폭</span></span>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#d97706"></div>
+    <span class="tl-date">4/8</span>
+    <span class="tl-body">미-이란 2주 휴전 합의. 호르무즈 일시 개방. 코스피 하루 <strong>+6.87%</strong> 급반등. VIX -18.3% 급락<span class="tl-badge" style="background:#fffbeb;color:#92400e">휴전 랠리</span></span>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#dc2626"></div>
+    <span class="tl-date">4/11~12</span>
+    <span class="tl-body">파키스탄 종전 협상 개최. 핵 포기·호르무즈 쟁점 평행선. 밴스 부통령 "합의 없이 귀환" 선언<span class="tl-badge" style="background:#fef2f2;color:#b91c1c">협상 결렬</span></span>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#dc2626"></div>
+    <span class="tl-date">4/13 오늘</span>
+    <span class="tl-body">미군 호르무즈 역봉쇄 시작(한국시간 오후 11시). 삼성전자·SK하이닉스 -2%대. 유가 100달러 재돌파. 실적 시즌 개막(골드만삭스)<span class="tl-badge" style="background:#fef2f2;color:#b91c1c">현재진행형</span></span>
+  </div>
+</div>
+
+<!-- 섹터 영향 -->
+<h2 class="section">전쟁이 뒤집어놓은 주식판 — 섹터별 등락</h2>
+<p class="body">전쟁 발발(2월 27일) 대비 4월 9일 기준 등락을 정리했습니다. 방산·건설·신재생에너지는 수혜를 받은 반면, 반도체·수입 의존 업종은 직격탄을 맞았습니다.</p>
+
+<div class="sector-wrap">
+  <div class="sector-row">
+    <span class="sector-name">광통신 (광전자 등)</span>
+    <div class="sector-bar-bg"><div class="sector-bar" style="width:100%;background:#16a34a"></div></div>
+    <span class="sector-pct green">+447%</span>
+  </div>
+  <div class="sector-row">
+    <span class="sector-name">건설 (대우건설)</span>
+    <div class="sector-bar-bg"><div class="sector-bar" style="width:100%;background:#16a34a"></div></div>
+    <span class="sector-pct green">+130%</span>
+  </div>
+  <div class="sector-row">
+    <span class="sector-name">방산 (LIG넥스원)</span>
+    <div class="sector-bar-bg"><div class="sector-bar" style="width:74%;background:#16a34a"></div></div>
+    <span class="sector-pct green">+74%</span>
+  </div>
+  <div class="sector-row">
+    <span class="sector-name">신재생에너지</span>
+    <div class="sector-bar-bg"><div class="sector-bar" style="width:58%;background:#639922"></div></div>
+    <span class="sector-pct green">+58%</span>
+  </div>
+  <div class="sector-row">
+    <span class="sector-name">코스피 전체</span>
+    <div class="sector-bar-bg"><div class="sector-bar" style="width:19%;background:#dc2626"></div></div>
+    <span class="sector-pct red">-19%</span>
+  </div>
+  <div class="sector-row">
+    <span class="sector-name">반도체 (삼성·하닉스)</span>
+    <div class="sector-bar-bg"><div class="sector-bar" style="width:40%;background:#dc2626"></div></div>
+    <span class="sector-pct red">-40%±</span>
+  </div>
+</div>
+
+<div class="highlight-box">💡 반도체가 -40%까지 빠졌지만, 4월 8일 휴전 당일 SK하이닉스는 하루 만에 +13.65% 급등했습니다. 변동성이 양방향으로 극단적인 상황입니다.</div>
+
+<!-- 시뮬레이터 -->
+<h2 class="section">직접 해보는 유가 충격 시뮬레이터</h2>
+<p class="body">유가와 환율을 조정하면 내 포트폴리오에 미치는 영향을 실시간으로 확인할 수 있습니다. 슬라이더를 움직여 시나리오를 체험해 보세요.</p>
+
+<div class="sim-box">
+  <p class="sim-title">유가·환율 시나리오 시뮬레이터 <span class="sim-badge">직접 체험</span></p>
+  <div class="fr">
+    <span class="fl">WTI 유가 ($/배럴)</span>
+    <div class="fi"><input type="range" id="oil" min="60" max="150" step="5" value="100"><span class="fv" id="oil-v">$100</span></div>
+  </div>
+  <div class="fr">
+    <span class="fl">원·달러 환율</span>
+    <div class="fi"><input type="range" id="fx" min="1200" max="1600" step="10" value="1450"><span class="fv" id="fx-v">1,450원</span></div>
+  </div>
+  <div class="fr">
+    <span class="fl">내 포트폴리오 유형</span>
+    <div class="fi">
+      <select id="port-type">
+        <option value="semi">반도체 중심 (60%+)</option>
+        <option value="balanced">균형 포트폴리오</option>
+        <option value="defense">방산·에너지 중심</option>
+        <option value="safe">안전자산 중심</option>
+      </select>
+    </div>
+  </div>
+  <div id="sim-hbox" class="sim-hbox"></div>
+  <div class="sim-result">
+    <div class="sim-res"><p class="sim-rl">포트폴리오 위험도</p><p class="sim-rv" id="sim-impact">—</p></div>
+    <div class="sim-res"><p class="sim-rl">인플레 압박 수준</p><p class="sim-rv" id="sim-infl">—</p></div>
+    <div class="sim-res"><p class="sim-rl">추천 전략</p><p class="sim-rv" id="sim-strat" style="font-size:12px;line-height:1.4">—</p></div>
+  </div>
+</div>
+
+<!-- 시나리오별 전략 -->
+<h2 class="section">앞으로 3가지 시나리오와 투자 전략</h2>
+<p class="body">협상이 어떻게 흘러가느냐에 따라 전략이 완전히 달라집니다. 세 가지 시나리오를 기준으로 대응 방법을 정리했습니다.</p>
+
+<div class="strat-grid">
+  <div class="strat-card" style="background:#f0fdf4">
+    <span class="strat-badge" style="background:#dcfce7;color:#15803d">종전 합의 시</span>
+    <p class="strat-title">반도체·금융 비중 확대</p>
+    <p class="strat-body">유가 하락 → 인플레 완화 → 금리 인하 기대. 낙폭이 컸던 주도주의 반등 강도가 가장 클 것. 코스피 선행 PER 7.12배는 딥밸류 구간.</p>
+    <p class="strat-stocks">▶ 삼성전자·SK하이닉스·KB금융·현대차</p>
+  </div>
+  <div class="strat-card" style="background:#fffbeb">
+    <span class="strat-badge" style="background:#fef3c7;color:#92400e">협상 교착 시</span>
+    <p class="strat-title">방산·에너지 핵심 유지</p>
+    <p class="strat-body">유가 고공행진 지속. 에너지 밸류체인 중장기 성장 스토리 유효. 실적 중심 코어 유지하며 조정 시 분할매수.</p>
+    <p class="strat-stocks">▶ LIG넥스원·한화에어로·SK이터닉스·두산에너빌</p>
+  </div>
+  <div class="strat-card" style="background:#fef2f2">
+    <span class="strat-badge" style="background:#fee2e2;color:#b91c1c">전쟁 재격화 시</span>
+    <p class="strat-title">현금·금·달러 비중 확대</p>
+    <p class="strat-body">안전자산 선호 심화. 원·달러 1,500원 재위협. 방어적 포지션 유지 + 낙폭과대 종목 분할매수 대기.</p>
+    <p class="strat-stocks">▶ 금 ETF·달러 예금·고배당 방어주</p>
+  </div>
+</div>
+
+<!-- 투자 원칙 -->
+<h2 class="section">지금 꼭 지켜야 할 투자 원칙 5가지</h2>
+<div class="checklist">
+  <div class="check-item">
+    <div class="check-icon" style="background:#dcfce7;color:#15803d">1</div>
+    <span><strong>지정학적 리스크는 결국 소음</strong> — 역사적으로 전쟁 발발 후 증시는 결국 펀더멘털로 회귀했습니다. 코스피 선행 PER 7.12배는 딥밸류 구간입니다.</span>
+  </div>
+  <div class="check-item">
+    <div class="check-icon" style="background:#dcfce7;color:#15803d">2</div>
+    <span><strong>분할매수 원칙 절대 고수</strong> — 협상 재개·결렬에 따라 하루에 ±7%를 오가는 시장입니다. 한 번에 올인은 절대 금물. 2~3회 나눠 진입하세요.</span>
+  </div>
+  <div class="check-item">
+    <div class="check-icon" style="background:#dcfce7;color:#15803d">3</div>
+    <span><strong>실적 시즌에 집중</strong> — 오늘부터 골드만삭스 등 본격 실적 발표 시작. S&P500 EPS 추정 +14.4%. 4/15 ASML, 4/16 TSMC가 반도체 업황의 핵심 가늠자입니다.</span>
+  </div>
+  <div class="check-item">
+    <div class="check-icon" style="background:#fee2e2;color:#b91c1c">!</div>
+    <span><strong>고유가·고환율 구간 주의</strong> — 원·달러 1,500원 재위협 시 외국인 매도 재개 가능. 수입 의존 업종(항공·해운 등) 단기 비중 축소를 고려하세요.</span>
+  </div>
+  <div class="check-item">
+    <div class="check-icon" style="background:#fee2e2;color:#b91c1c">!</div>
+    <span><strong>CPI +3.3% — 금리 인하 기대 후퇴</strong> — 휘발유 가격 21.2% 급등이 전체 물가 상승의 4분의 3을 차지했습니다. FOMC 결과와 연준 인사 발언을 주시하세요.</span>
+  </div>
+</div>
+
+<!-- 이번 주 일정 -->
+<h2 class="section">이번 주 주요 일정 (4/13~18)</h2>
+<div class="schedule">
+  <div class="sch-row">
+    <span class="sch-date">4/13 오늘</span>
+    <span class="tl-badge" style="background:#fee2e2;color:#b91c1c">긴급</span>
+    <span>미군 호르무즈 역봉쇄 시작 · 골드만삭스 Q1 실적 발표</span>
+  </div>
+  <div class="sch-row">
+    <span class="sch-date">4/14</span>
+    <span class="tl-badge" style="background:#fffbeb;color:#92400e">중요</span>
+    <span>美 3월 PPI 발표 · JP모건·웰스파고 실적 · 이스라엘-레바논 협상</span>
+  </div>
+  <div class="sch-row">
+    <span class="sch-date">4/15</span>
+    <span class="tl-badge" style="background:#dcfce7;color:#15803d">반도체</span>
+    <span>ASML 실적 — 반도체 업황 가늠 핵심 지표</span>
+  </div>
+  <div class="sch-row">
+    <span class="sch-date">4/16</span>
+    <span class="tl-badge" style="background:#dcfce7;color:#15803d">반도체</span>
+    <span>TSMC 실적 발표 · 삼성전자 실적 기대감 연동</span>
+  </div>
+  <div class="sch-row">
+    <span class="sch-date">4월 말</span>
+    <span class="tl-badge" style="background:#eff6ff;color:#1d4ed8">Fed</span>
+    <span>FOMC 회의 · 케빈 워시 차기 연준 의장 후보 인사청문회</span>
+  </div>
+</div>
+
+<!-- 마무리 -->
+<h2 class="section">Mr.J의 한 줄 정리</h2>
+<div class="tip-box">
+  협상 결렬은 악재지만, <strong>코스피 PER 7배는 역사적 저평가 구간</strong>입니다. 실적 시즌(ASML·TSMC)이 버팀목이 되어준다면, 이번 변동성은 오히려 저가 매수 기회가 될 수 있습니다. 단, 유가 120달러 이상 진입 시에는 시나리오를 재검토해야 합니다.
+</div>
+
+<p class="body">오늘 콘텐츠에서 다룬 내용은 참고용 분석이며 실제 투자 결과를 보장하지 않습니다. 위 시뮬레이터를 직접 조작해보며 본인의 포트폴리오 상황에 맞는 전략을 찾아보세요. 다음 포스팅에서는 ASML·TSMC 실적 결과를 바탕으로 반도체 투자 타이밍을 분석해드리겠습니다!</p>
+
+<!-- 태그 -->
+<div class="tags">
+  <span class="tag">#미이란전쟁</span>
+  <span class="tag">#호르무즈봉쇄</span>
+  <span class="tag">#유가100달러</span>
+  <span class="tag">#코스피전망</span>
+  <span class="tag">#방산주</span>
+  <span class="tag">#반도체주</span>
+  <span class="tag">#주식투자</span>
+  <span class="tag">#2026주식</span>
+  <span class="tag">#투자전략</span>
+  <span class="tag">#재테크</span>
+  <span class="tag">#QQQi</span>
+  <span class="tag">#ETF투자</span>
+</div>
+
+<div class="post-footer">
+  ※ 본 콘텐츠는 2026년 4월 13일 기준 공개된 뉴스·증권사 리포트를 바탕으로 작성되었습니다.<br>
+  ※ 투자 판단의 최종 책임은 투자자 본인에게 있으며, 본 자료는 투자 권유가 아닙니다.<br>
+  ※ 출처: 뉴시스, 서울파이낸스, KB자산운용, 키움증권, 대신증권 리서치, 한국거래소
+</div>
+
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+function update(){
+  const oil=+$('oil').value,fx=+$('fx').value,port=$('port-type').value;
+  $('oil-v').textContent='$'+oil;
+  $('fx-v').textContent=fx.toLocaleString('ko-KR')+'원';
+  let impact,infl,strat,hc,hbg,hbc;
+  const oilHigh=oil>=100,fxHigh=fx>=1450;
+  if(port==='semi'){impact=oilHigh&&fxHigh?'고위험':'중위험';strat=oilHigh?'방산·에너지 교체 검토':'반등 시 비중 확대';}
+  else if(port==='defense'){impact=oilHigh?'수혜 지속':'수혜 축소';strat=oilHigh?'현 포지션 유지':'신재생에너지 조절';}
+  else if(port==='balanced'){impact=oilHigh&&fxHigh?'중위험':'저위험';strat='분할매수 기회 탐색';}
+  else{impact='저위험';strat='현금 유지, 저점 대기';}
+  if(oil>=120){infl='극심';hc='#b91c1c';hbg='#fef2f2';hbc='#fecaca';}
+  else if(oil>=100){infl='높음';hc='#92400e';hbg='#fffbeb';hbc='#fcd34d';}
+  else if(oil>=80){infl='보통';hc='#1d4ed8';hbg='#eff6ff';hbc='#bfdbfe';}
+  else{infl='낮음';hc='#15803d';hbg='#f0fdf4';hbc='#bbf7d0';}
+  const hbox=$('sim-hbox');
+  hbox.style.background=hbg;hbox.style.borderColor=hbc;hbox.style.color=hc;
+  hbox.textContent='WTI $'+oil+' · 환율 '+fx.toLocaleString('ko-KR')+'원 → '+(oil>=100?'호르무즈 봉쇄 장기화 시나리오':'유가 안정 시나리오')+' · 인플레 압박: '+infl;
+  const iv=$('sim-impact'),ic=impact.includes('고')?'red':impact.includes('수혜')&&oil>=100?'green':impact.includes('저')?'green':'amber';
+  iv.textContent=impact;iv.className='sim-rv '+ic;
+  const ifv=$('sim-infl'),ifc=infl==='극심'?'red':infl==='높음'?'amber':infl==='낮음'?'green':'blue';
+  ifv.textContent=infl;ifv.className='sim-rv '+ifc;
+  $('sim-strat').textContent=strat;
+}
+['oil','fx'].forEach(id=>$(id).addEventListener('input',update));
+$('port-type').addEventListener('change',update);
+update();
+</script>
+</body>
+</html>
