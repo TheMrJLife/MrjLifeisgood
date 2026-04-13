@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr.J의 즐거운 돈 놀이 | 신용대출 × 배당투자 계산기</title>
+<meta name="description" content="신용대출 한도·월납입액, QQQi ETF 배당 세후 실수령액, 환율 민감도를 한번에 계산하세요.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#f8f9fa;--surface:#ffffff;--border:#e2e8f0;--text:#1a202c;--text2:#64748b;--text3:#94a3b8;--blue:#2563eb;--blue-bg:#eff6ff;--blue-t:#1d4ed8;--green:#16a34a;--green-bg:#f0fdf4;--green-t:#15803d;--red:#dc2626;--red-bg:#fef2f2;--red-t:#b91c1c;--amber:#d97706;--amber-bg:#fffbeb;--r:10px;--rs:6px;}
+body{font-family:-apple-system,'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 20px;text-align:center;}
+header h1{font-size:18px;font-weight:700;color:var(--blue);}
+header p{font-size:12px;color:var(--text2);margin-top:4px;}
+.container{max-width:700px;margin:0 auto;padding:20px 16px 60px;}
+.tab-nav{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:4px;gap:4px;margin-bottom:18px;}
+.tab-btn{flex:1;font-size:13px;font-weight:600;padding:9px 4px;border:none;background:transparent;cursor:pointer;color:var(--text2);border-radius:var(--rs);transition:all .15s;}
+.tab-btn.active{background:var(--blue);color:#fff;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:14px;}
+.sec-label{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+.fr{display:flex;align-items:center;gap:10px;margin-bottom:12px;}.fr:last-child{margin-bottom:0;}
+.fl{font-size:13px;color:var(--text2);min-width:130px;flex-shrink:0;}
+.fi{display:flex;align-items:center;gap:8px;flex:1;}
+.fi input[type=range]{flex:1;accent-color:var(--blue);}
+.fi input[type=number],.fi input[type=text]{flex:1;border:1px solid var(--border);border-radius:var(--rs);padding:7px 10px;font-size:13px;color:var(--text);background:var(--bg);outline:none;}
+.fi input:focus{border-color:var(--blue);}
+.fi select{flex:1;border:1px solid var(--border);border-radius:var(--rs);padding:7px 10px;font-size:13px;color:var(--text);background:var(--bg);outline:none;}
+.fi-u{font-size:12px;color:var(--text2);white-space:nowrap;}
+.fv{font-size:13px;font-weight:700;min-width:68px;text-align:right;color:var(--text);}
+.divider{border:none;border-top:1px solid var(--border);margin:14px 0;}
+.mg2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.mg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.mg4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.m{background:var(--bg);border-radius:var(--rs);padding:13px;border:1px solid var(--border);}
+.m .ml{font-size:11px;color:var(--text2);margin-bottom:5px;line-height:1.4;}
+.m .mv{font-size:17px;font-weight:700;}
+.mv.blue{color:var(--blue);}.mv.green{color:var(--green);}.mv.red{color:var(--red);}.mv.amber{color:var(--amber);}
+.warn-box{background:var(--amber-bg);border:1px solid #fcd34d;border-radius:var(--rs);padding:10px 14px;font-size:12px;color:#92400e;margin-bottom:14px;display:none;}
+.flow{display:flex;align-items:stretch;gap:0;margin-bottom:14px;}
+.fb{flex:1;background:var(--bg);border-radius:var(--rs);padding:12px 8px;text-align:center;border:1px solid var(--border);}
+.fb.success{background:var(--green-bg);border-color:#bbf7d0;}
+.fa{display:flex;align-items:center;padding:0 4px;color:var(--text3);font-size:14px;}
+.fbl{font-size:10px;color:var(--text2);margin-bottom:4px;}
+.fb.success .fbl{color:var(--green-t);}
+.fbv{font-size:13px;font-weight:700;}
+.fbs{font-size:10px;color:var(--text3);margin-top:2px;}
+.bar-wrap{margin:8px 0 6px;}
+.bar-stack{height:10px;border-radius:6px;overflow:hidden;display:flex;}
+.lgrow{display:flex;gap:14px;flex-wrap:wrap;}
+.lgi{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2);}
+.dot{width:9px;height:9px;border-radius:50%;}
+.amort-wrap{overflow-x:auto;}
+.amort-tbl{width:100%;font-size:12px;border-collapse:collapse;min-width:380px;}
+.amort-tbl th{text-align:right;padding:7px 8px;color:var(--text2);font-weight:600;border-bottom:1px solid var(--border);background:var(--bg);}
+.amort-tbl th:first-child{text-align:left;}
+.amort-tbl td{text-align:right;padding:7px 8px;border-bottom:1px solid var(--border);}
+.amort-tbl td:first-child{text-align:left;color:var(--text2);}
+.amort-tbl tr:last-child td{border-bottom:none;}
+.hbox{border-radius:var(--rs);padding:10px 14px;font-size:12px;font-weight:600;margin-bottom:14px;border:1px solid;}
+.sg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.sc{border-radius:var(--rs);padding:13px;border:1px solid var(--border);}
+.sb{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:7px;}
+.sc .sfx{font-size:12px;color:var(--text2);margin-bottom:2px;}
+.sc .sfc{font-size:10px;margin-bottom:7px;}
+.sc .sn{font-size:18px;font-weight:700;margin-bottom:2px;}
+.sc .sy{font-size:11px;margin-bottom:6px;}
+.sc .sd{font-size:10px;color:var(--text3);border-top:1px solid var(--border);padding-top:7px;margin-top:4px;line-height:1.8;}
+.note{font-size:11px;color:var(--text3);line-height:1.8;margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:var(--rs);border:1px solid var(--border);}
+footer{text-align:center;font-size:11px;color:var(--text3);padding:20px;border-top:1px solid var(--border);margin-top:10px;}
+@media(max-width:480px){.mg4{grid-template-columns:repeat(2,minmax(0,1fr));}.sg{grid-template-columns:1fr;}.fl{min-width:100px;font-size:12px;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Mr.J의 즐거운 돈 놀이</h1>
+  <p>신용대출 × ETF 배당투자 × 환율 민감도 통합 계산기</p>
+</header>
+<div class="container">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('loan')">신용대출</button>
+    <button class="tab-btn" onclick="switchTab('div')">배당 수익</button>
+    <button class="tab-btn" onclick="switchTab('fx')">환율 민감도</button>
+  </div>
+
+  <div id="tab-loan" class="tab-content active">
+    <div class="card">
+      <p class="sec-label">대출 조건</p>
+      <div class="fr"><span class="fl">연 소득</span><div class="fi"><input type="range" id="l-income" min="2000" max="20000" step="100" value="5000"><span class="fv" id="l-income-v">5,000만원</span></div></div>
+      <div class="fr"><span class="fl">신용점수</span><div class="fi"><input type="range" id="l-score" min="300" max="1000" step="10" value="750"><span class="fv" id="l-score-v">750점</span></div></div>
+      <div class="fr"><span class="fl">대출 금액</span><div class="fi"><input type="range" id="l-amount" min="500" max="10000" step="100" value="3000"><span class="fv" id="l-amount-v">3,000만원</span></div></div>
+      <div class="fr"><span class="fl">대출 기간</span><div class="fi"><input type="range" id="l-period" min="6" max="60" step="6" value="36"><span class="fv" id="l-period-v">36개월</span></div></div>
+      <div class="fr"><span class="fl">상환 방식</span><div class="fi"><select id="l-repay"><option value="equal">원리금균등</option><option value="principal">원금균등</option><option value="bullet">만기일시상환</option></select></div></div>
+    </div>
+    <div class="warn-box" id="l-warn">⚠ 입력 금액이 추정 한도를 초과합니다.</div>
+    <div class="mg4">
+      <div class="m"><p class="ml">추정 대출 한도</p><p class="mv blue" id="l-limit">—</p></div>
+      <div class="m"><p class="ml">적용 금리 (연)</p><p class="mv" id="l-rate">—</p></div>
+      <div class="m"><p class="ml">월 납입액</p><p class="mv" id="l-monthly">—</p></div>
+      <div class="m"><p class="ml">총 이자 합계</p><p class="mv" id="l-interest">—</p></div>
+    </div>
+    <div class="card">
+      <p class="sec-label">원금 vs 이자 비율</p>
+      <div class="bar-wrap"><div class="bar-stack" id="l-bar"></div></div>
+      <div class="lgrow"><div class="lgi"><div class="dot" style="background:#2563eb"></div>원금</div><div class="lgi"><div class="dot" style="background:#f87171"></div>이자</div></div>
+    </div>
+    <div class="card">
+      <p class="sec-label">상환 일정 (처음 6회)</p>
+      <div class="amort-wrap"><table class="amort-tbl"><thead><tr><th>회차</th><th>월납입액</th><th>원금</th><th>이자</th><th>잔금</th></tr></thead><tbody id="l-amort"></tbody></table></div>
+    </div>
+    <p class="note">* 추정 한도는 DSR 40%(신용 800+ 50%) 기준 / 실제 은행 심사와 다를 수 있습니다.</p>
+  </div>
+
+  <div id="tab-div" class="tab-content">
+    <div class="card">
+      <p class="sec-label">투자 조건</p>
+      <div class="fr"><span class="fl">종목</span><div class="fi"><input type="text" id="d-ticker" value="QQQi" style="max-width:80px;font-weight:700;"></div></div>
+      <div class="fr"><span class="fl">ETF 단가 (USD)</span><div class="fi"><input type="number" id="d-price" value="52" min="1" step="0.01" style="max-width:100px;"></div></div>
+      <div class="fr"><span class="fl">투자 원금</span><div class="fi"><input type="number" id="d-invest" value="5000" min="100" step="100" style="max-width:100px;"><span class="fi-u">만원</span></div></div>
+      <div class="fr"><span class="fl">매입 환율</span><div class="fi"><input type="range" id="d-fx" min="1200" max="1800" step="10" value="1500"><span class="fv" id="d-fx-v">1,500원</span></div></div>
+      <div class="fr"><span class="fl">세전 배당률 (연)</span><div class="fi"><input type="range" id="d-divrate" min="5" max="30" step="0.5" value="14.5"><span class="fv" id="d-divrate-v">14.5%</span></div></div>
+      <div class="fr"><span class="fl">배당 세율</span><div class="fi"><input type="range" id="d-tax" min="0" max="30" step="0.5" value="15"><span class="fv" id="d-tax-v">15.0%</span></div></div>
+      <hr class="divider">
+      <div class="fr"><span class="fl">신용대출 금액</span><div class="fi"><input type="number" id="d-loan" value="3000" min="0" step="100" style="max-width:100px;"><span class="fi-u">만원</span></div></div>
+      <div class="fr"><span class="fl">대출 금리 (연)</span><div class="fi"><input type="range" id="d-lrate" min="2" max="20" step="0.1" value="7"><span class="fv" id="d-lrate-v">7.0%</span></div></div>
+    </div>
+    <div class="mg3">
+      <div class="m"><p class="ml">매입 주수</p><p class="mv blue" id="d-shares">—</p></div>
+      <div class="m"><p class="ml">월 배당률</p><p class="mv" id="d-mrate">—</p></div>
+      <div class="m"><p class="ml">연간 실효 수익률</p><p class="mv" id="d-yield">—</p></div>
+    </div>
+    <div class="card">
+      <p class="sec-label">월 수령액 흐름</p>
+      <div class="flow">
+        <div class="fb"><p class="fbl">세전 월 배당</p><p class="fbv" id="d-f1">—</p><p class="fbs" id="d-f1s">—</p></div>
+        <div class="fa">→</div>
+        <div class="fb"><p class="fbl">세금 차감</p><p class="fbv" id="d-f2" style="color:#dc2626">—</p></div>
+        <div class="fa">→</div>
+        <div class="fb"><p class="fbl">대출이자 차감</p><p class="fbv" id="d-f3" style="color:#d97706">—</p></div>
+        <div class="fa">→</div>
+        <div class="fb success"><p class="fbl">실수령액</p><p class="fbv" id="d-f4" style="color:#16a34a">—</p></div>
+      </div>
+      <div class="bar-wrap"><div class="bar-stack" id="d-bar"></div></div>
+      <div class="lgrow"><div class="lgi"><div class="dot" style="background:#16a34a"></div>실수령</div><div class="lgi"><div class="dot" style="background:#f87171"></div>세금</div><div class="lgi"><div class="dot" style="background:#fbbf24"></div>대출이자</div></div>
+    </div>
+    <div class="mg2">
+      <div class="m"><p class="ml">연간 세후 배당</p><p class="mv green" id="d-ann-div">—</p></div>
+      <div class="m"><p class="ml">연간 대출이자</p><p class="mv red" id="d-ann-int">—</p></div>
+    </div>
+    <p class="note">* 배당금은 매월 균등 지급 가정 / 실제 월별 배당금은 상이할 수 있습니다.</p>
+  </div>
+
+  <div id="tab-fx" class="tab-content">
+    <div class="card">
+      <p class="sec-label">고정 조건 (매입 시점)</p>
+      <div class="fr"><span class="fl">ETF 단가 (USD)</span><div class="fi"><input type="number" id="f-price" value="52" min="1" step="0.01" style="max-width:100px;"></div></div>
+      <div class="fr"><span class="fl">보유 주수</span><div class="fi"><input type="number" id="f-shares" value="641" min="1" step="1" style="max-width:100px;"><span class="fi-u">주</span></div></div>
+      <div class="fr"><span class="fl">매입 환율 (고정)</span><div class="fi"><input type="number" id="f-basefx" value="1500" min="800" max="2500" step="10" style="max-width:100px;"><span class="fi-u">원/USD</span></div></div>
+      <hr class="divider">
+      <p class="sec-label" style="margin-bottom:10px">변동 조건</p>
+      <div class="fr"><span class="fl">현재 환율</span><div class="fi"><input type="range" id="f-curfx" min="1000" max="2000" step="10" value="1500"><span class="fv" id="f-curfx-v">1,500원</span></div></div>
+      <div class="fr"><span class="fl">세전 배당률 (연)</span><div class="fi"><input type="range" id="f-divrate" min="5" max="30" step="0.5" value="14.5"><span class="fv" id="f-divrate-v">14.5%</span></div></div>
+      <div class="fr"><span class="fl">배당 세율</span><div class="fi"><input type="range" id="f-tax" min="0" max="30" step="0.5" value="15"><span class="fv" id="f-tax-v">15.0%</span></div></div>
+      <div class="fr"><span class="fl">신용대출</span><div class="fi"><input type="number" id="f-loan" value="3000" min="0" step="100" style="max-width:80px;"><span class="fi-u">만원 ×</span><input type="range" id="f-lrate" min="2" max="20" step="0.1" value="7"><span class="fv" id="f-lrate-v">7.0%</span></div></div>
+    </div>
+    <div class="hbox" id="f-hbox"></div>
+    <div class="mg3">
+      <div class="m"><p class="ml">원화 투자 원금 (고정)</p><p class="mv blue" id="f-invest">—</p></div>
+      <div class="m"><p class="ml">현재 평가금액</p><p class="mv" id="f-curval">—</p></div>
+      <div class="m"><p class="ml">평가손익</p><p class="mv" id="f-pnl">—</p></div>
+    </div>
+    <div class="sg" id="f-scen"></div>
+    <div class="card">
+      <p class="sec-label">환율별 월 실수령액</p>
+      <div style="position:relative;width:100%;height:220px"><canvas id="f-line" role="img" aria-label="환율 구간별 월 실수령액 꺾은선 차트"></canvas></div>
+      <div class="lgrow" style="margin-top:8px">
+        <div class="lgi"><span style="width:16px;height:3px;background:#16a34a;display:inline-block"></span>월 실수령액</div>
+        <div class="lgi"><span style="width:16px;height:0;border-top:2px dashed #2563eb;display:inline-block"></span>세후 배당</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="sec-label">환율별 연간 실효 수익률</p>
+      <div style="position:relative;width:100%;height:200px"><canvas id="f-bar" role="img" aria-label="환율별 연간 실효 수익률 막대 차트"></canvas></div>
+    </div>
+    <p class="note">* 원화 원금 = 주수 × 단가 × 매입환율(고정) / 배당 수령은 현재 환율 적용</p>
+  </div>
+</div>
+<footer>Mr.J의 즐거운 돈 놀이 · 본 계산기는 참고용이며 실제 투자 결과와 다를 수 있습니다.</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const fmtM=v=>Math.round(v/10000).toLocaleString('ko-KR')+'만원';
+const fmtW=v=>{const m=Math.round(v/10000);return m>=10000?(m/10000).toFixed(1).replace(/\.0$/,'')+'억원':m+'만원';};
+function switchTab(t){document.querySelectorAll('.tab-btn').forEach((b,i)=>{b.classList.toggle('active',['loan','div','fx'][i]===t);});document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));$('tab-'+t).classList.add('active');if(t==='fx')setTimeout(updateFX,50);}
+function lRate(s){return s>=900?4.5:s>=800?5.5:s>=700?7.0:s>=600?9.5:12.5;}
+function lLimit(inc,s){const dsr=s>=800?.5:s<600?.3:.4,r=lRate(s)/100/12,m=36,mp=(inc*10000/12)*dsr;return r===0?Math.round(mp*m/10000):Math.round(mp*(1-Math.pow(1+r,-m))/r/10000);}
+function lSched(amt,months,ann,type){const P=amt*10000,r=ann/100/12;let s=[];if(type==='equal'){const M=r===0?P/months:P*r*Math.pow(1+r,months)/(Math.pow(1+r,months)-1);let b=P;for(let i=1;i<=months;i++){const int=b*r,prin=M-int;b-=prin;s.push({m:i,pay:M,prin,int,bal:Math.max(0,b)});}}else if(type==='principal'){const prin=P/months;let b=P;for(let i=1;i<=months;i++){const int=b*r,pay=prin+int;b-=prin;s.push({m:i,pay,prin,int,bal:Math.max(0,b)});}}else{const int=P*r;for(let i=1;i<=months;i++){const last=i===months;s.push({m:i,pay:last?P+int:int,prin:last?P:0,int,bal:last?0:P});}}return s;}
+function updateLoan(){const inc=+$('l-income').value,sc=+$('l-score').value,amt=+$('l-amount').value,per=+$('l-period').value,rep=$('l-repay').value;$('l-income-v').textContent=fmtW(inc*10000);$('l-score-v').textContent=sc+'점';$('l-amount-v').textContent=fmtW(amt*10000);$('l-period-v').textContent=per+'개월';const rate=lRate(sc),lim=lLimit(inc,sc);$('l-warn').style.display=amt>lim?'block':'none';const sch=lSched(amt,per,rate,rep),totInt=sch.reduce((s,r)=>s+r.int,0);$('l-limit').textContent=fmtW(lim*10000);$('l-rate').textContent=rate.toFixed(1)+'%';$('l-monthly').textContent=fmtM(sch[0].pay);$('l-interest').textContent=fmtM(totInt);const pct=amt*10000/(amt*10000+totInt)*100;$('l-bar').innerHTML=`<div style="width:${pct.toFixed(1)}%;background:#2563eb"></div><div style="width:${(100-pct).toFixed(1)}%;background:#f87171"></div>`;$('l-amort').innerHTML=sch.slice(0,6).map(r=>`<tr><td>${r.m}회차</td><td>${fmtM(r.pay)}</td><td>${fmtM(r.prin)}</td><td>${fmtM(r.int)}</td><td>${fmtM(r.bal)}</td></tr>`).join('');}
+function updateDiv(){const pr=+$('d-price').value||52,inv=(+$('d-invest').value||5000)*10000,fx=+$('d-fx').value||1500,dr=+$('d-divrate').value||14.5,tx=+$('d-tax').value||15,ln=(+$('d-loan').value||0)*10000,lr=+$('d-lrate').value||7;$('d-fx-v').textContent=fx.toLocaleString('ko-KR')+'원';$('d-divrate-v').textContent=dr.toFixed(1)+'%';$('d-tax-v').textContent=tx.toFixed(1)+'%';$('d-lrate-v').textContent=lr.toFixed(1)+'%';const sh=Math.floor(inv/fx/pr),mGU=sh*pr*(dr/100)/12,mGK=mGU*fx,mT=mGK*(tx/100),mA=mGK-mT,mI=ln*(lr/100)/12,mN=mA-mI;const annD=mA*12,annI=mI*12,annN=mN*12,yld=(annN/inv)*100;$('d-shares').textContent=sh.toLocaleString()+'주';$('d-mrate').textContent=(dr/12).toFixed(3)+'%';const ye=$('d-yield');ye.textContent=yld.toFixed(2)+'%';ye.className='mv '+(yld>=0?'green':'red');$('d-f1').textContent='$'+mGU.toFixed(2);$('d-f1s').textContent=fmtM(mGK);$('d-f2').textContent='- '+fmtM(mT);$('d-f3').textContent=ln>0?'- '+fmtM(mI):'없음';$('d-f4').textContent=fmtM(Math.max(0,mN));const tot=mGK,pN=Math.max(0,mN)/tot*100,pT=mT/tot*100,pI=Math.min(mI/tot*100,100-pN-pT);$('d-bar').innerHTML=`<div style="width:${pN.toFixed(1)}%;background:#16a34a"></div><div style="width:${pT.toFixed(1)}%;background:#f87171"></div><div style="width:${pI.toFixed(1)}%;background:#fbbf24"></div>`;$('d-ann-div').textContent=fmtM(annD);$('d-ann-int').textContent=ln>0?fmtM(annI):'—';}
+const FXP=[1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000];let fLine=null,fBar=null;
+function fCalc(sh,pr,fx,dr,tx,ln,lr){const mGU=sh*pr*(dr/100)/12,mGK=mGU*fx,mT=mGK*(tx/100),mA=mGK-mT,mI=ln*(lr/100)/12;return{mA,mI,mN:mA-mI};}
+function updateFX(){const pr=+$('f-price').value||52,sh=+$('f-shares').value||641,bfx=+$('f-basefx').value||1500,cfx=+$('f-curfx').value||1500,dr=+$('f-divrate').value||14.5,tx=+$('f-tax').value||15,ln=(+$('f-loan').value||0)*10000,lr=+$('f-lrate').value||7;$('f-curfx-v').textContent=cfx.toLocaleString('ko-KR')+'원';$('f-divrate-v').textContent=dr.toFixed(1)+'%';$('f-tax-v').textContent=tx.toFixed(1)+'%';$('f-lrate-v').textContent=lr.toFixed(1)+'%';const invK=sh*pr*bfx,curV=sh*pr*cfx,pnl=curV-invK,diff=cfx-bfx,pct=((cfx-bfx)/bfx*100);$('f-invest').textContent=fmtM(invK);const cv=$('f-curval');cv.textContent=fmtM(curV);cv.className='mv '+(pnl>=0?'green':'red');const pe=$('f-pnl');pe.textContent=(pnl>=0?'+':'')+fmtM(pnl);pe.className='mv '+(pnl>=0?'green':'red');const hb=$('f-hbox'),sign=diff>0?'+':'',arrow=diff>0?'▲':diff<0?'▼':'─',dc=diff>0?'#15803d':diff<0?'#b91c1c':'#1d4ed8',dbg=diff>0?'#f0fdf4':diff<0?'#fef2f2':'#eff6ff',dbc=diff>0?'#bbf7d0':diff<0?'#fecaca':'#bfdbfe';hb.style.background=dbg;hb.style.borderColor=dbc;hb.style.color=dc;hb.innerHTML=`매입 ${bfx.toLocaleString('ko-KR')}원 → 현재 ${cfx.toLocaleString('ko-KR')}원 &nbsp;${arrow} ${sign}${diff.toLocaleString('ko-KR')}원 (${sign}${pct.toFixed(1)}%)`;
+const sc=$('f-scen');sc.innerHTML='';const bR=fCalc(sh,pr,bfx,dr,tx,ln,lr);[{label:'환율 -200원',fx:bfx-200},{label:'현재 환율',fx:cfx},{label:'환율 +200원',fx:bfx+200}].forEach((s,i)=>{const r=fCalc(sh,pr,s.fx,dr,tx,ln,lr),annN=r.mN*12,yld=(annN/invK)*100,nc=r.mN>=0?'#16a34a':'#dc2626',fvb=s.fx-bfx,fl=fvb===0?'매입 환율과 동일':(fvb>0?'+':'')+fvb.toLocaleString('ko-KR')+'원',isCur=i===1,bbg=isCur?'#eff6ff':fvb>0?'#f0fdf4':'#fef2f2',bco=isCur?'#1d4ed8':fvb>0?'#15803d':'#b91c1c',cbg=isCur?'#eff6ff':fvb>0?'#f0fdf4':'#fef2f2',dd=r.mA-bR.mA,ds=(dd>=0?'+':'')+fmtM(dd);sc.innerHTML+=`<div class="sc" style="background:${cbg}"><span class="sb" style="background:${bbg};color:${bco}">${s.label}</span><p class="sfx">${s.fx.toLocaleString('ko-KR')}원</p><p class="sfc" style="color:${bco}">${fl}</p><p class="sn" style="color:${nc}">${fmtM(r.mN)}</p><p class="sy" style="color:${nc}">연 ${yld.toFixed(2)}%</p><div class="sd">세후 배당 ${fmtM(r.mA)}<br>기준 대비 ${ds}<br>대출이자 -${fmtM(r.mI)}</div></div>`;});
+const labs=FXP.map(f=>f.toLocaleString('ko-KR')),nd=FXP.map(f=>Math.round(fCalc(sh,pr,f,dr,tx,ln,lr).mN/10000)),ad=FXP.map(f=>Math.round(fCalc(sh,pr,f,dr,tx,ln,lr).mA/10000)),pr2=FXP.map(f=>f===cfx?7:3),pc2=FXP.map(f=>f===cfx?'#2563eb':'#16a34a');
+if(fLine)fLine.destroy();fLine=new Chart($('f-line'),{type:'line',data:{labels:labs,datasets:[{label:'월 실수령액',data:nd,borderColor:'#16a34a',backgroundColor:'rgba(22,163,74,0.07)',borderWidth:2,pointRadius:pr2,pointBackgroundColor:pc2,tension:.3,fill:true},{label:'세후 배당',data:ad,borderColor:'#2563eb',borderWidth:2,borderDash:[5,4],pointRadius:2,tension:.3,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()+'만원'}}},scales:{x:{ticks:{font:{size:10},color:'#94a3b8',autoSkip:false,maxRotation:30},grid:{display:false}},y:{ticks:{font:{size:10},color:'#94a3b8',callback:v=>v+'만'},grid:{color:'rgba(0,0,0,0.05)'}}}}});
+const yd=FXP.map(f=>parseFloat((fCalc(sh,pr,f,dr,tx,ln,lr).mN*12/invK*100).toFixed(2))),bc=yd.map((v,i)=>FXP[i]===cfx?'#2563eb':v>=0?'#16a34a':'#dc2626');
+if(fBar)fBar.destroy();fBar=new Chart($('f-bar'),{type:'bar',data:{labels:labs,datasets:[{label:'연간 실효 수익률',data:yd,backgroundColor:bc}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(2)+'%'}}},scales:{x:{ticks:{font:{size:10},color:'#94a3b8',autoSkip:false,maxRotation:30},grid:{display:false}},y:{ticks:{font:{size:10},color:'#94a3b8',callback:v=>v+'%'},grid:{color:'rgba(0,0,0,0.05)'}}}}});}
+['l-income','l-score','l-amount','l-period'].forEach(id=>$(id).addEventListener('input',updateLoan));$('l-repay').addEventListener('change',updateLoan);
+['d-price','d-invest','d-fx','d-divrate','d-tax','d-loan','d-lrate'].forEach(id=>{const e=$(id);e.addEventListener('input',updateDiv);e.addEventListener('change',updateDiv);});
+['f-price','f-shares','f-basefx','f-curfx','f-divrate','f-tax','f-loan','f-lrate'].forEach(id=>{const e=$(id);e.addEventListener('input',updateFX);e.addEventListener('change',updateFX);});
+updateLoan();updateDiv();updateFX();
+</script>
+</body>
+</html>
